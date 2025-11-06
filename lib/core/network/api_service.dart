@@ -6,7 +6,19 @@ import 'package:retrofit/retrofit.dart';
 part 'api_service.g.dart';
 
 final apiServiceProvider = Provider.autoDispose<ApiService>(
-      (ref) => ApiService(Dio()),
+  (ref) => ApiService(
+    Dio(
+      BaseOptions(
+        baseUrl: "https://jsonplaceholder.typicode.com",
+        connectTimeout: Duration(seconds: 30),
+        receiveTimeout: Duration(seconds: 30),
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+        },
+      ),
+    ),
+  ),
 );
 
 @RestApi(baseUrl: "https://jsonplaceholder.typicode.com")

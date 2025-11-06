@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/exceptions/base_exception.dart';
@@ -30,6 +32,7 @@ class PostViewModel extends Notifier<State<List<Post>>> {
     } on BaseException catch (e) {
       state = State.error(e);
     } catch (e, st) {
+      log("errror", error: e, stackTrace: st);
       state = State.error(GenericException(message: e.toString()));
     }
   }
